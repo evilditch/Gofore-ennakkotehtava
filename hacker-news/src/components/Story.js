@@ -1,9 +1,10 @@
 
-const Story = (props) => {
-  if (props.id !== '') {
+const Story = ({ id, closeStory }) => {
+  if (id !== null) {
     return (
       <div>
-        <h2>Jutun otsikko { props.id }</h2>
+      <button onClick={() => closeStory()}>Close</button>
+        <h2>Jutun otsikko { id }</h2>
         <p>Sisältö</p>
       </div>
     )

@@ -1,9 +1,9 @@
 
-const StoriesList = () => {
+const StoriesList = ({ openStory }) => {
   return (
     <ul>
-      <li>Eka juttu</li>
-      <li>Toka juttu</li>
+      <li><button onClick={() => openStory(1)}>Eka juttu</button></li>
+      <li><button onClick={() => openStory(2)}>Toka juttu</button></li>
     </ul>
   )
 }
