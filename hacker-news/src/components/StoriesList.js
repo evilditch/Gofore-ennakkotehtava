@@ -1,10 +1,11 @@
 
-const StoriesList = ({ openStory }) => {
+const StoriesList = ({ openStory, stories }) => {
   return (
-    <ul>
-      <li><button onClick={() => openStory(1)}>Eka juttu</button></li>
-      <li><button onClick={() => openStory(2)}>Toka juttu</button></li>
-    </ul>
+    <ol>
+    { stories.map(story => 
+      <li key={story.id}><button onClick={() => openStory(story.id)}>{ story.by }: { story.title }</button></li>
+    )}
+    </ol>
   )
 }
 

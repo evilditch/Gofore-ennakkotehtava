@@ -4,11 +4,8 @@ import storyService from './services/stories'
 import { useState, useEffect } from 'react'
 
 const App = () => {
-  const [storyId, setStoryId] = useState(null)
-  const [ids, setIds] = useState([])
+  const [viewStory, setViewStory] = useState(null)
   const [stories, setStories] = useState([])
-  
-
 
   useEffect(() => {
     const fetchData = async () => {
@@ -21,18 +18,19 @@ const App = () => {
   console.log(stories.length)
 
   const openStory = (id) => {
-    setStoryId(id)
+    const story = stories.find(story => story.id === id)
+    setViewStory(story)
   }
 
   const closeStory = () => {
-    setStoryId(null)
+    setViewStory(null)
   }
 
   return (
     <>
       <h1>The most read stories of Hacker News</h1>
-    <StoriesList openStory={openStory}/>
-    <Story id={storyId} closeStory={closeStory} />
+    <StoriesList openStory={openStory} stories={stories.slice(0,20)} />
+    <Story story={viewStory} closeStory={closeStory} />
     </>
   )
 }
