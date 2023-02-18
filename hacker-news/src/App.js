@@ -1,9 +1,24 @@
 import StoriesList from './components/StoriesList'
 import Story from './components/Story'
-import { useState } from 'react'
+import storyService from './services/stories'
+import { useState, useEffect } from 'react'
 
 const App = () => {
   const [storyId, setStoryId] = useState(null)
+  const [ids, setIds] = useState([])
+  const [stories, setStories] = useState([])
+  
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const topStories = await storyService.getStories()
+      setStories(topStories)
+    }
+    fetchData()
+  }, [])
+  
+  console.log(stories.length)
 
   const openStory = (id) => {
     setStoryId(id)
