@@ -25,9 +25,9 @@ const StoryDialog = ({ story, dialogRef, closeStory}) => {
           <p>By <b>{ story.by }</b> { timeAgo }</p>
           <p>Score { story.score }</p>
           <p>URL: <a href={story.url}>{ story.url}</a></p>
-          <button onClick={closeStory} className='closebutton'>Close</button>
         </>
       }
+      <button onClick={closeStory} className='closebutton'>Close</button>
     </dialog>
   )
 }
