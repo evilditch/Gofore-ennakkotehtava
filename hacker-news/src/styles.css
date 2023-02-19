@@ -1,0 +1,27 @@
+body {
+  font-family: sans-serif;
+}
+
+ol li {
+  margin-bottom: .3em;
+}
+
+.openbutton {
+  border: none;
+  background-color: transparent;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+
+/* Backdrop is only displayed when dialog is opened with dialog.showModal() */
+dialog::backdrop {
+  background: rgba(200, 200, 200, 0.25);
+}
+
+.closebutton {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  margin: 2em;
+}
