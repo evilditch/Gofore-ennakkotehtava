@@ -15,11 +15,12 @@ const getStory = async (storyId) => {
   return response.data
 }
 
-const getStories = async () => {
-  const ids = await topStories()
-  console.log('id lista ', ids)
+const getStories = async (idsList) => {
+  console.log('Idejä haetaan', idsList)
+  // const ids = await topStories()
+  // console.log('id lista ', ids)
 
-  const stories = await Promise.all(ids.map(id => {
+  const stories = await Promise.all(idsList.map(id => {
     return getStory(id)
   }))
   console.log(stories[0])
@@ -27,4 +28,4 @@ const getStories = async () => {
   return stories
 }
 
-export default { getStories }
+export default { topStories, getStories }

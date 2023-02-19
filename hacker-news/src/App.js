@@ -5,11 +5,17 @@ import { useState, useEffect } from 'react'
 
 const App = () => {
   const [viewStory, setViewStory] = useState(null)
+  const [idsList, setIdsList] = useState([])
   const [stories, setStories] = useState([])
 
   useEffect(() => {
     const fetchData = async () => {
-      const topStories = await storyService.getStories()
+      // Haetaan apista suosituimpien juttujen id:t ja talletetaan ne sovelluksen tilaan
+      const topStoriesIds = await storyService.topStories()
+      setIdsList(topStoriesIds)
+      
+      // Haetaan apista 20 ensimmäistä suosituinta juttua ja tallennetaan ne sovelluksen tilaan
+      const topStories = await storyService.getStories(topStoriesIds.slice(0,20))
       setStories(topStories)
     }
     fetchData()
