@@ -25,15 +25,15 @@ const App = () => {
     fetchData()
   }, [])
   
-  console.log(stories.length)
-  
   useEffect(() => {
+    // Varmistetaan, että näytettävä juttu on päivittynyt tilaan, ennen kuin avataan modaali
     if (viewStory) {
       storyDialogRef.current.showModal()
     }
   }, [viewStory])
   
   useEffect(() => {
+    // Kun uusi sisältö on ladattu, siirretään fokus sen alkuun
     if (stories.length > showing && newContentRef.current) {
       newContentRef.current.focus()
       setShowing(stories.length)
@@ -43,13 +43,14 @@ const App = () => {
   const openStory = (id) => {
     const story = stories.find(story => story.id === id)
     setViewStory(story)
-    // storyDialogRef.current.showModal()
   }
 
   const closeStory = () => {
     storyDialogRef.current.close()
     setViewStory(null)
   }
+  
+  
   
   const loadMore = async () => {
     const newStories = await storyService.getStories(idsList.slice(stories.length, stories.length+20))
@@ -59,10 +60,10 @@ const App = () => {
   return (
     <>
       <h1>The top stories of Hacker News</h1>
-    <StoriesList openStory={openStory} stories={stories} newContentRef={newContentRef} showing={showing} />
-    { stories.length > 0 && showing < idsList.length &&
-      <button onClick={loadMore}>Show more</button>
-    }
+      <StoriesList openStory={openStory} stories={stories} newContentRef={newContentRef} showing={showing} />
+      { stories.length > 0 && showing < idsList.length &&
+        <button onClick={loadMore}>Show more</button>
+      }
       <StoryDialog dialogRef={storyDialogRef} story={viewStory} closeStory={closeStory} />
     </>
   )
