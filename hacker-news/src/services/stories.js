@@ -16,7 +16,6 @@ const getStories = async (idsList) => {
   const stories = await Promise.all(idsList.map(id => {
     return getStory(id)
   }))
-  
   return stories
 }
 
