@@ -10,6 +10,7 @@ const App = () => {
   const [showing, setShowing] = useState(0)
   const storyDialogRef = useRef()
   const newContentRef = useRef()
+  const showMoreBtnRef = useRef()
 
   useEffect(() => {
     const fetchData = async () => {
@@ -36,6 +37,8 @@ const App = () => {
     // Kun uusi sisältö on ladattu, siirretään fokus sen alkuun
     if (stories.length > showing && newContentRef.current) {
       newContentRef.current.focus()
+      showMoreBtnRef.current.innerText = 'Show more'
+      showMoreBtnRef.current.disabled = false
       setShowing(stories.length)
     }
   }, [stories, showing])
@@ -50,9 +53,9 @@ const App = () => {
     setViewStory(null)
   }
   
-  
-  
   const loadMore = async () => {
+    showMoreBtnRef.current.innerText = 'Loading...'
+    showMoreBtnRef.current.disabled = true
     const newStories = await storyService.getStories(idsList.slice(stories.length, stories.length+20))
     setStories(stories.concat(newStories))
   }
@@ -62,7 +65,7 @@ const App = () => {
       <h1>The top stories of Hacker News</h1>
       <StoriesList openStory={openStory} stories={stories} newContentRef={newContentRef} showing={showing} />
       { stories.length > 0 && showing < idsList.length &&
-        <button onClick={loadMore}>Show more</button>
+        <button onClick={loadMore} ref={showMoreBtnRef}>Show more</button>
       }
       <StoryDialog dialogRef={storyDialogRef} story={viewStory} closeStory={closeStory} />
     </>
