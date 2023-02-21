@@ -27,7 +27,7 @@ const StoryDialog = ({ story, dialogRef, closeStory}) => {
           <p>URL: <a href={story.url}>{ story.url}</a></p>
         </>
       }
-      <button onClick={closeStory} className='closebutton'>Close</button>
+      <div className='closebutton'><button onClick={closeStory}>Close</button></div>
     </dialog>
   )
 }
