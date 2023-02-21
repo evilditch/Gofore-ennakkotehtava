@@ -1,4 +1,3 @@
-// import '../styles.css'
 
 const StoriesList = ({ openStory, stories, newContentRef, showing }) => {
   return (
